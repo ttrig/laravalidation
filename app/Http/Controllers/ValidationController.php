@@ -10,9 +10,13 @@ class ValidationController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $groupedById = collect($request->all())->groupBy(function ($value, $key) {
-            return explode('-', $key)[1];
-        })->toArray();
+        $groupedById = collect($request->all())
+            ->filter(function ($value, $key) {
+                return preg_match('/^(rule|value)\-\d+$/', $key);
+            })
+            ->groupBy(function ($value, $key) {
+                return explode('-', $key)[1];
+            })->toArray();
 
         $validate = [];
         $ruleErrors = [];

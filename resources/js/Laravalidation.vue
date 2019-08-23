@@ -3,11 +3,16 @@
     <ValidationRows/>
     <div class="row">
       <div class="col-md-12 mb-3 text-center">
-      <ClearButton :count="getCount"/>
-      <SaveButton :count="getCount"/>
-      <AddButton :count="getCount"/>
+        <ClearButton :count="getCount"/>
+        <SaveButton :count="getCount"/>
+        <AddButton :count="getCount"/>
       </div>
     </div>
+
+    <div class="row">
+      <ToggleMiddleware />
+    </div>
+
     <div class="row">
       <HashUrl/>
       <Base64Url/>
@@ -22,6 +27,7 @@ import SaveButton from '@/components/buttons/SaveButton.vue'
 import AddButton from '@/components/buttons/AddButton.vue'
 import HashUrl from '@/components/HashUrl.vue'
 import Base64Url from '@/components/Base64Url.vue'
+import ToggleMiddleware from '@/components/ToggleMiddleware.vue'
 
 export default {
   created() {
@@ -41,6 +47,7 @@ export default {
     AddButton,
     HashUrl,
     Base64Url,
+    ToggleMiddleware,
   },
   computed: {
     getCount() {

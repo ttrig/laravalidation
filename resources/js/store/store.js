@@ -11,6 +11,7 @@ export default new Vuex.Store({
     saving: false,
     saveFailed: false,
     savedRows: null,
+    useMiddleware: true,
   },
   getters: {
     rows: state => state.rows,
@@ -84,6 +85,9 @@ export default new Vuex.Store({
         return item
       })
     },
+    toggleMiddleware(state, bool) {
+      state.useMiddleware = bool
+    },
     setErrors(state, errors) {
       state.errors = errors
     },
@@ -104,7 +108,13 @@ export default new Vuex.Store({
     validate({state, getters, commit}) {
       if (!state.saving) {
         commit('setSaving', true)
-        axios.post('/validate', getters.postData)
+
+        let url = '/validate'
+        if (! state.useMiddleware) {
+          url += '?disable-middleware'
+        }
+
+        axios.post(url, getters.postData)
            .then(() => commit('setErrors', []))
            .catch(error => commit('setErrors', error.response.data.errors))
            .finally(() => commit('setSaving', false))
