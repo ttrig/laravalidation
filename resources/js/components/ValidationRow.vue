@@ -22,7 +22,7 @@
         <input
           autocomplete="off"
           type="text"
-          placeholder="value to validate"
+          :placeholder="row.value === null ? 'null' : 'value to validate'"
           class="form-control"
           :class="valueClassName"
           :name="valueInputName"
@@ -31,14 +31,25 @@
           @keyup="updateRow"
         >
         <div class="input-group-append">
-          <div class="input-group-text">
-            <input
-              type="checkbox"
-              aria-label="Checkbox for disabling this value"
-              :checked="!row.disabled"
-              @change="toggleRow"
-            >
-          </div>
+          <button
+            type="button"
+            class="btn btn-sm"
+            :class="row.disabled ? 'btn-success' : 'btn-secondary'"
+            :title="row.disabled ? 'Enable input' : 'Disable input'"
+            @click="toggleRow"
+          >
+            <i class="fa fa-fw" :class="row.disabled ? 'fa-play' : 'fa-stop'"></i>
+          </button>
+        </div>
+        <div class="input-group-append">
+          <button
+            type="button"
+            class="btn btn-sm btn-primary"
+            title="Null"
+            @click="nullRow"
+          >
+            <i class="fa fa-fw fa-eraser"></i>
+          </button>
         </div>
         <div class="input-group-append">
           <button
@@ -46,7 +57,7 @@
             class="btn btn-sm btn-danger"
             @click="deleteRow"
           >
-            <i class="fa fa-trash"></i>
+            <i class="fa fa-fw fa-trash"></i>
           </button>
         </div>
         <!-- these feedback div's breaks rounded border on the input-group above :'( -->
@@ -117,6 +128,10 @@ export default {
     },
     toggleRow() {
       this.$store.commit('toggleRow', this.row)
+      this.$store.dispatch('validate')
+    },
+    nullRow(event) {
+      this.$store.commit('nullRow', this.row)
       this.$store.dispatch('validate')
     },
   },

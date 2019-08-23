@@ -53,7 +53,7 @@ export default new Vuex.Store({
         row = {
           rule: 'required|string',
           value: '',
-          disabled: false
+          disabled: false,
         }
       }
 
@@ -81,6 +81,15 @@ export default new Vuex.Store({
         if (item.id === toggledRow.id) {
           toggledRow.disabled = !toggledRow.disabled
           return toggledRow
+        }
+        return item
+      })
+    },
+    nullRow(state, row) {
+      state.rows = state.rows.map(item => {
+        if (item.id === row.id) {
+          row.value = null
+          return row
         }
         return item
       })

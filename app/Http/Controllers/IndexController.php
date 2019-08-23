@@ -68,7 +68,7 @@ class IndexController extends BaseController
             ],
             [
                 'rule' => 'nullable|in:foo,bar',
-                'value' => 'bar',
+                'value' => null,
                 'disabled' => true,
             ],
         ]);
