@@ -1,5 +1,8 @@
-![Travis (.org)](https://img.shields.io/travis/ttrig/laravalidation.svg)
-![MIT license](https://img.shields.io/github/license/ttrig/laravalidation.svg)
+<p align="center">
+<a href="https://travis-ci.org/ttrig/laravalidation/branches"><img src="https://travis-ci.org/ttrig/laravalidation.svg?branch=master" alt="Build Status"></a>
+<a href="https://codecov.io/gh/ttrig/laravalidation"><img src="https://img.shields.io/codecov/c/github/ttrig/laravalidation/master.svg" alt="Codecov"></a>
+<a href="https://github.com/ttrig/laravalidation/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/ttrig/laravalidation.svg" alt="License"></a>
+</p>
 
 # Laravalidation
 
