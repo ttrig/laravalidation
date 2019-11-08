@@ -29,7 +29,7 @@ class SaveControllerTest extends TestCase
 
         $this->post('/save', compact('json'))
             ->assertStatus(422)
-            ->assertSee('You saved to many entries to fast, try again later.')
+            ->assertSeeText('You saved to many entries to fast, try again later.')
         ;
     }
 }
