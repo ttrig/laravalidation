@@ -17,7 +17,7 @@ class IndexControllerTest extends TestCase
 
     public function test_happy_path_with_base64()
     {
-        $json = '{"rule-1":"required|string","value-1":""}';
+        $json = '[{"rule":"required|string","value":"","disabled":false}]';
         $base64 = base64_encode($json);
 
         $this->get('/' . $base64)
