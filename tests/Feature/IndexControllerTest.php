@@ -26,6 +26,14 @@ class IndexControllerTest extends TestCase
         ;
     }
 
+    public function test_sad_path_with_base64()
+    {
+        $this->get('/' . 'not-a-base-64-string')
+            ->assertOk()
+            ->assertDontSee('not-a-base-64-string')
+        ;
+    }
+
     public function test_happy_path_with_saved()
     {
         $saved = factory(Saved::class)->create();
