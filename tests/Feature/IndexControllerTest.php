@@ -10,7 +10,7 @@ class IndexControllerTest extends TestCase
     public function test_happy_path()
     {
         $this->get('/')
-            ->assertStatus(200)
+            ->assertOk()
             ->assertSeeText(config('app.name'))
         ;
     }
@@ -21,7 +21,7 @@ class IndexControllerTest extends TestCase
         $base64 = base64_encode($json);
 
         $this->get('/' . $base64)
-            ->assertStatus(200)
+            ->assertOk()
             ->assertSee($json)
         ;
     }
@@ -31,7 +31,7 @@ class IndexControllerTest extends TestCase
         $saved = factory(Saved::class)->create();
 
         $this->get('/' . $saved->hashid)
-            ->assertStatus(200)
+            ->assertOk()
             ->assertSee($saved->json)
         ;
     }
