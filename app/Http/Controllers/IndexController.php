@@ -19,9 +19,7 @@ class IndexController extends BaseController
 
     private function jsonFromBase64($encodedString): ?string
     {
-        try {
-            $json = base64_decode($encodedString);
-        } catch (\Exception $_) {
+        if (! $json = base64_decode($encodedString, $strict = true)) {
             return null;
         }
 
