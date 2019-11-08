@@ -1,12 +1,15 @@
 language: php
+
 php:
   - 7.3
 
-before_script:
-  - phpenv config-rm xdebug.ini
+before_install:
   - touch database/database.sqlite
-  - composer install --no-interaction
-  - npm install
+  - travis_retry composer self-update
+
+install:
+  - travis_retry composer install --no-interaction --no-suggest
+  - travis_retry npm install
 
 script:
   - npm run production
