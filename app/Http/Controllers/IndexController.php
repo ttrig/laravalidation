@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Saved;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class IndexController extends BaseController
 {
-    public function __invoke(Request $request, $someValue = null)
+    public function __invoke($data = null)
     {
-        $json = $this->jsonFromBase64($someValue)
-             ?? $this->jsonFromSaved($someValue)
+        $json = $this->jsonFromBase64($data)
+             ?? $this->jsonFromSaved($data)
              ?? $this->jsonFromDefault()
         ;
 
