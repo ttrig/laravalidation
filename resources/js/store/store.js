@@ -25,7 +25,10 @@ export default new Vuex.Store({
 
       _.each(filtered, row => {
         data['rule-' + row.id] = row.rule
-        data['value-' + row.id] = row.value
+
+        if (row.send_value) {
+          data['value-' + row.id] = row.value
+        }
       })
 
       return data
@@ -53,9 +56,10 @@ export default new Vuex.Store({
         row = {
           rule: 'required|string',
           value: '',
-          disabled: false,
         }
       }
+
+      row = _.defaults(row, { disabled: false }, { send_value: true });
 
       let maxId = _.max(_.map(state.rows, 'id')) || 0
       row.id = maxId + 1
@@ -76,10 +80,19 @@ export default new Vuex.Store({
         return item
       })
     },
-    toggleRow(state, toggledRow) {
+    toggleRowDisabled(state, toggledRow) {
       state.rows = state.rows.map(item => {
         if (item.id === toggledRow.id) {
           toggledRow.disabled = !toggledRow.disabled
+          return toggledRow
+        }
+        return item
+      })
+    },
+    toggleRowSendValue(state, toggledRow) {
+      state.rows = state.rows.map(item => {
+        if (item.id === toggledRow.id) {
+          toggledRow.send_value = !toggledRow.send_value
           return toggledRow
         }
         return item

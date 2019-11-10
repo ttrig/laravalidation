@@ -13,6 +13,9 @@
       <div class="invalid-feedback">
         {{ ruleErrors.toString() }}
       </div>
+      <div v-if="row.disabled" class="w-100 text-muted disabled-text">
+        Row is disabled, it will not be sent to validation.
+      </div>
     </div>
     <div class="form-group col-md-6">
       <div class="input-group mb-2 mr-sm-2">
@@ -26,7 +29,7 @@
           class="form-control"
           :class="valueClassName"
           :name="valueInputName"
-          :readonly="row.disabled"
+          :readonly="row.disabled || ! row.send_value"
           v-model="row.value"
           @keyup="updateRow"
         >
@@ -35,10 +38,21 @@
             type="button"
             class="btn btn-sm"
             :class="row.disabled ? 'btn-success' : 'btn-secondary'"
-            :title="row.disabled ? 'Enable input' : 'Disable input'"
-            @click="toggleRow"
+            :title="row.disabled ? 'Enable row' : 'Disable row'"
+            @click="toggleRowDisabled"
           >
             <i class="fa fa-fw" :class="row.disabled ? 'fa-play' : 'fa-stop'"></i>
+          </button>
+        </div>
+        <div class="input-group-append">
+          <button
+            type="button"
+            class="btn btn-sm"
+            :class="row.send_value ? 'btn-warning' : 'btn-warning'"
+            :title="row.send_value ? 'Disable value' : 'Enable value'"
+            @click="toggleRowSendValue"
+          >
+            <i class="fa fa-fw" :class="row.send_value ? 'fa-eye' : 'fa-eye-slash'"></i>
           </button>
         </div>
         <div class="input-group-append">
@@ -67,8 +81,8 @@
         <div class="invalid-feedback">
           {{ valueErrors.toString() }}
         </div>
-        <div v-if="row.disabled" class="w-100 text-muted disabled-text">
-          Disabled, will not be sent to validation.
+        <div v-if="! row.send_value" class="w-100 text-muted disabled-text">
+          Row will be validated but {{ valueInputName }} will not be sent.
         </div>
       </div>
       <hr class="d-sm-none">
@@ -126,8 +140,12 @@ export default {
       this.$store.commit('updateRow', this.row)
       this.$store.dispatch('validate')
     },
-    toggleRow() {
-      this.$store.commit('toggleRow', this.row)
+    toggleRowDisabled() {
+      this.$store.commit('toggleRowDisabled', this.row)
+      this.$store.dispatch('validate')
+    },
+    toggleRowSendValue() {
+      this.$store.commit('toggleRowSendValue', this.row)
       this.$store.dispatch('validate')
     },
     nullRow(event) {
