@@ -10,18 +10,10 @@ class ValidationController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $groupedById = collect($request->all())
-            ->filter(function ($value, $key) {
-                return preg_match('/^(rule|value)\-\d+$/', $key);
-            })
-            ->groupBy(function ($value, $key) {
-                return explode('-', $key)[1];
-            })->toArray();
-
         $validate = [];
         $ruleErrors = [];
 
-        foreach ($groupedById as $id => $array) {
+        foreach ($this->getRuleIds($request) as $id) {
             $ruleKey = 'rule-' . $id;
             $rule = $request->input($ruleKey) ?? 'required|string';
 
@@ -49,5 +41,18 @@ class ValidationController extends Controller
         });
 
         return $validator->validate();
+    }
+
+    private function getRuleIds(Request $request): array
+    {
+        return collect($request->all())
+            ->filter(function ($value, $key) {
+                return preg_match('/^rule\-\d+$/', $key);
+            })
+            ->map(function ($value, $key) {
+                return explode('-', $key)[1];
+            })
+            ->values()
+            ->toArray();
     }
 }
