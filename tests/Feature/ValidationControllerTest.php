@@ -20,13 +20,12 @@ class ValidationControllerTest extends TestCase
     /**
      * @dataProvider provider
      */
-    public function test_validation($data, $messages)
+    public function test_validation($data, $errorMessages = [])
     {
         $response = $this->postJson('/validate', $data);
 
-        if ($messages) {
-            $response->assertStatus(422)
-                ->assertJsonFragment($messages);
+        if ($errorMessages) {
+            $response->assertStatus(422)->assertJsonFragment($errorMessages);
         } else {
             $response->assertOk();
         }
@@ -35,37 +34,34 @@ class ValidationControllerTest extends TestCase
     public function provider()
     {
         return [
-            [
-                [
-                    'rule-1' => 'required|string',
-                    'value-1' => 'foobar',
-                ],
-                [],
+            'Filled value' => [
+                ['rule-1' => 'required', 'value-1' => 'foobar'],
             ],
-            [
+            'Empty value' => [
+                ['rule-1' => 'required', 'value-1' => ''],
+                ['value-1' => ['The value-1 field is required.']],
+            ],
+            'Null value' => [
+                ['rule-1' => 'nullable', 'value-1' => null],
+            ],
+            'Absent value' => [
+                ['rule-1' => 'present'],
+                ['value-1' => ['The value-1 field must be present.']],
+            ],
+            'Empty rule' => [
                 ['rule-1' => ''],
                 ['rule-1' => ['The rule-1 field is required.']],
             ],
-            [
+            'Invalid rule' => [
                 ['rule-1' => 'req'],
                 ['rule-1' => ['Method Illuminate\\Validation\\Validator::validateReq does not exist.']],
             ],
-            [
+            'Unsupported rule without value' => [
                 ['rule-1' => 'exists'],
                 ['rule-1' => ['Not supported yet.']],
             ],
-            [
-                [
-                    'rule-1' => 'required|string',
-                    'value-1' => '',
-                ],
-                ['value-1' => ['The value-1 field is required.']],
-            ],
-            [
-                [
-                    'rule-1' => 'exists',
-                    'value-1' => '',
-                ],
+            'Unsupported rule with value' => [
+                ['rule-1' => 'exists', 'value-1' => 'foobar'],
                 ['rule-1' => ['Not supported yet.']],
             ],
         ];
