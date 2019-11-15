@@ -1,7 +1,7 @@
 <template>
   <transition name="root">
     <form v-if="count" autocomplete="off" novalidate>
-      <div class="row text-center d-none d-sm-flex">
+      <div class="row text-center d-none d-md-flex">
         <div class="form-group col-md-6">
           <label class="text-muted" v-text="ruleLabel"></label>
         </div>

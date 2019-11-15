@@ -1,92 +1,106 @@
 <template>
   <div class="form-row">
-    <div class="form-group col-md-6">
-      <input
-        type="text"
-        placeholder="e.g. required|string"
-        class="form-control"
-        :class="ruleClassName"
-        :name="ruleInputName"
-        v-model="row.rule"
-        @keyup="updateRow"
+
+    <div class="d-flex col-md-6 align-items-baseline">
+
+      <button
+        type="button"
+        class="btn btn-sm btn-danger mr-1"
+        title="Delete row"
+        @click="deleteRow"
       >
-      <div class="invalid-feedback">
-        {{ ruleErrors.toString() }}
-      </div>
-      <div v-if="row.disabled" class="w-100 text-muted disabled-text">
-        Row is disabled, it will not be sent to validation.
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-      <div class="input-group mb-2 mr-sm-2">
-        <div class="input-group-prepend">
-          <div class="input-group-text" v-text="valueInputName"></div>
-        </div>
+        <i class="fa fa-fw fa-trash"></i>
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-sm"
+        :class="row.disabled ? 'btn-success' : 'btn-secondary'"
+        :title="row.disabled ? 'Enable row' : 'Disable row'"
+        @click="toggleRowDisabled"
+      >
+        <i class="fa fa-fw" :class="row.disabled ? 'fa-toggle-on' : 'fa-toggle-off'"></i>
+      </button>
+
+      <div class="form-group flex-grow-1 p-1">
         <input
-          autocomplete="off"
           type="text"
-          :placeholder="row.value === null ? 'null' : 'value to validate'"
+          placeholder="e.g. required|string"
           class="form-control"
-          :class="valueClassName"
-          :name="valueInputName"
-          :readonly="row.disabled || ! row.send_value"
-          v-model="row.value"
+          :class="ruleClassName"
+          :name="ruleInputName"
+          :readonly="row.disabled"
+          v-model="row.rule"
           @keyup="updateRow"
         >
-        <div class="input-group-append">
-          <button
-            type="button"
-            class="btn btn-sm"
-            :class="row.disabled ? 'btn-success' : 'btn-secondary'"
-            :title="row.disabled ? 'Enable row' : 'Disable row'"
-            @click="toggleRowDisabled"
-          >
-            <i class="fa fa-fw" :class="row.disabled ? 'fa-play' : 'fa-stop'"></i>
-          </button>
-        </div>
-        <div class="input-group-append">
-          <button
-            type="button"
-            class="btn btn-sm"
-            :class="row.send_value ? 'btn-warning' : 'btn-warning'"
-            :title="row.send_value ? 'Disable value' : 'Enable value'"
-            @click="toggleRowSendValue"
-          >
-            <i class="fa fa-fw" :class="row.send_value ? 'fa-eye' : 'fa-eye-slash'"></i>
-          </button>
-        </div>
-        <div class="input-group-append">
-          <button
-            type="button"
-            class="btn btn-sm btn-primary"
-            title="Null"
-            @click="nullRow"
-          >
-            <i class="fa fa-fw fa-eraser"></i>
-          </button>
-        </div>
-        <div class="input-group-append">
-          <button
-            type="button"
-            class="btn btn-sm btn-danger"
-            @click="deleteRow"
-          >
-            <i class="fa fa-fw fa-trash"></i>
-          </button>
-        </div>
-        <!-- these feedback div's breaks rounded border on the input-group above :'( -->
-        <div class="valid-feedback">
-          Looks good!
-        </div>
         <div class="invalid-feedback">
-          {{ valueErrors.toString() }}
+          {{ ruleErrors.toString() }}
         </div>
-        <div v-if="! row.send_value" class="w-100 text-muted disabled-text">
-          Row will be validated but {{ valueInputName }} will not be sent.
+        <div v-if="row.disabled" class="w-100 text-muted disabled-text">
+          Row is disabled, it will not be sent to validation.
         </div>
       </div>
-      <hr class="d-sm-none">
+
     </div>
+
+    <div class="d-flex col-md-6 flex-row-reverse flex-md-row align-items-baseline">
+
+      <div class="form-group flex-grow-1 p-1">
+
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text" v-text="valueInputName"></div>
+          </div>
+          <input
+            autocomplete="off"
+            type="text"
+            class="form-control"
+            :class="valueClassName"
+            :name="valueInputName"
+            :readonly="row.disabled || ! row.send_value"
+            :placeholder="row.value === null ? 'null' : 'value to validate'"
+            v-model="row.value"
+            @keyup="updateRow"
+          >
+        </div>
+
+        <div v-if="! valueErrors.length" class="valid-feedback d-block">
+          Looks good!
+        </div>
+
+        <div v-if="valueErrors.length" class="invalid-feedback d-block">
+          {{ valueErrors.toString() }}
+        </div>
+
+        <div v-if="! row.disabled && ! row.send_value" class="w-100 text-muted disabled-text">
+          Row will be validated but {{ valueInputName }} will not be sent.
+        </div>
+
+      </div>
+
+        <button
+          type="button"
+          class="btn btn-sm ml-1 ml-md-0"
+          :class="row.send_value ? 'btn-warning' : 'btn-warning'"
+          :title="row.send_value ? 'Disable value' : 'Enable value'"
+          @click="toggleRowSendValue"
+        >
+          <i class="fa fa-fw" :class="row.send_value ? 'fa-eye' : 'fa-eye-slash'"></i>
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-sm btn-primary ml-md-1"
+          title="Null"
+          @click="nullRow"
+        >
+          <i class="fa fa-fw fa-eraser"></i>
+        </button>
+
+
+    </div>
+
+    <hr class="d-md-none">
   </div>
 </template>
 
