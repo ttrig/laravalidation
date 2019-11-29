@@ -24,7 +24,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" target="_blank" href="https://laravel.com/docs/5.8/validation">
+            <a class="nav-link" target="_blank" href="https://laravel.com/docs/6.x/validation">
               <i class="fa fa-file"></i> Laravel documentation
             </a>
           </li>
