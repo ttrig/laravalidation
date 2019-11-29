@@ -46,12 +46,8 @@ class ValidationController extends Controller
     private function getRuleIds(Request $request): array
     {
         return collect($request->all())
-            ->filter(function ($value, $key) {
-                return preg_match('/^rule\-\d+$/', $key);
-            })
-            ->map(function ($value, $key) {
-                return explode('-', $key)[1];
-            })
+            ->filter(fn($value, $key) => preg_match('/^rule\-\d+$/', $key))
+            ->map(fn($value, $key) => explode('-', $key)[1])
             ->values()
             ->toArray();
     }
