@@ -39,18 +39,13 @@ class IndexController extends BaseController
     {
         return json_encode([
             [
-                'rule' => 'required|string',
+                'rule' => 'filled|string',
                 'value' => 'foobar',
                 'disabled' => false,
             ],
             [
-                'rule' => 'required_with:value-1|numeric',
-                'value' => '',
-                'disabled' => false,
-            ],
-            [
-                'rule' => 'invalid-rule',
-                'value' => '',
+                'rule' => 'required_with:value-1|ip',
+                'value' => request()->ip(),
                 'disabled' => false,
             ],
             [
@@ -65,8 +60,14 @@ class IndexController extends BaseController
             ],
             [
                 'rule' => 'nullable|in:foo,bar',
-                'value' => null,
+                'value' => 'foo',
                 'disabled' => true,
+            ],
+            [
+                'rule' => 'invalid-rule',
+                'value' => null,
+                'disabled' => false,
+                'send_value' => false,
             ],
         ]);
     }
