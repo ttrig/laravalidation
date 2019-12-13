@@ -3,9 +3,9 @@
 namespace Tests\Unit;
 
 use App\Saved;
-use Hashids;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Vinkla\Hashids\Facades\Hashids;
 
 class SavedTest extends TestCase
 {

@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Hashids;
+use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Model;
 
 class Saved extends Model
