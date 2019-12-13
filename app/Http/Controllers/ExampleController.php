@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
-use Str;
+use Illuminate\Support\Str;
 
 class ExampleController extends BaseController
 {

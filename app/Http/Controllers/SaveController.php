@@ -21,6 +21,7 @@ class SaveController extends BaseController
         if ($count > 10) {
             abort(422, 'You saved to many entries to fast, try again later.');
         }
+
         $saved = Saved::create([
             'json' => $request->json,
             'ip' => $request->getClientIp(),
