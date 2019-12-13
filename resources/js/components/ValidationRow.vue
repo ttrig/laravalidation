@@ -64,7 +64,7 @@
           >
         </div>
 
-        <div v-if="! valueErrors.length" class="valid-feedback d-block">
+        <div v-if="showSuccessMessage" class="valid-feedback d-block">
           Looks good!
         </div>
 
@@ -142,6 +142,9 @@ export default {
     },
     valueErrors() {
       return _.get(this.errors, 'value-' + this.row.id, [])
+    },
+    showSuccessMessage() {
+      return this.valueClassName === 'is-valid' && this.ruleClassName === 'is-valid'
     },
   },
   methods: {
