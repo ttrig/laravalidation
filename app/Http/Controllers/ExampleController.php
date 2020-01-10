@@ -53,6 +53,27 @@ class ExampleController extends BaseController
         ];
     }
 
+    private function exampleExclude(): array
+    {
+        return [
+            [
+                'rule' => 'required',
+                'value' => 'foo',
+                'disabled' => false,
+            ],
+            [
+                'rule' => 'exclude_if:value-1,foo',
+                'value' => 'ignore me',
+                'disabled' => false,
+            ],
+            [
+                'rule' => 'required_without:value-2',
+                'value' => '',
+                'disabled' => false,
+            ],
+        ];
+    }
+
     private function exampleNullable(): array
     {
         return [

@@ -26,6 +26,7 @@ class ExampleControllerTest extends TestCase
     {
         return [
             ['required', '"required_unless:value-1,foobar",'],
+            ['exclude', '"exclude_if:value-1,foo'],
             ['nullable', '"nullable",'],
             ['filled', '"filled",'],
             ['present', '"present",'],
