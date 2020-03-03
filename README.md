@@ -6,9 +6,9 @@
 
 # Laravalidation
 
-Lab project in [Laravel](https://laravel.com) for learning [Vue.js](https://vuejs.org).
+Test [Laravel](https://laravel.com) validation rules with ease at [laravalidation.com](https://laravalidation.com).
 
-![Screenshot](https://raw.githubusercontent.com/ttrig/laravalidation/master/screenshots/1.png)
+Started out as a lab project for learning [Vue.js](https://vuejs.org).
 
 ## Quickstart
 
@@ -17,12 +17,11 @@ cp .env.example .env
 touch database/database.sqlite
 
 composer install
+
 npm install
-
-php artisan key:generate
-php artisan serve
-
 npm run watch
+
+php artisan serve
 ```
 
 ## Contributing
