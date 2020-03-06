@@ -10,7 +10,7 @@ class ExampleControllerTest extends TestCase
     {
         $this->get('/example/foobar')
             ->assertOk()
-            ->assertSee('<script id="json-rows" type="text/template"></script>')
+            ->assertSee('<script id="json-rows" type="text/template"></script>', $escaped = false)
         ;
     }
 
@@ -19,7 +19,10 @@ class ExampleControllerTest extends TestCase
      */
     public function test_happy_path($name, $needle)
     {
-        $this->get('/example/' . $name)->assertOk()->assertSeeText($needle);
+        $this->get('/example/' . $name)
+            ->assertOk()
+            ->assertSeeText($needle, $escaped = false)
+        ;
     }
 
     public function exampleProvider()

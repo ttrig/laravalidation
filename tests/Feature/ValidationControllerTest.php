@@ -13,7 +13,7 @@ class ValidationControllerTest extends TestCase
                 'value-1' => '',
             ])
             ->assertOk()
-            ->assertJsonPath('value-1', '', $strict = true)
+            ->assertJsonPath('value-1', '')
         ;
     }
 
