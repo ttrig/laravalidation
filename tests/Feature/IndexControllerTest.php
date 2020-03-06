@@ -22,7 +22,7 @@ class IndexControllerTest extends TestCase
 
         $this->get('/' . $base64)
             ->assertOk()
-            ->assertSee($json)
+            ->assertSee($json, $escaped = false)
         ;
     }
 
@@ -40,7 +40,7 @@ class IndexControllerTest extends TestCase
 
         $this->get('/' . $saved->hashid)
             ->assertOk()
-            ->assertSee($saved->json)
+            ->assertSee($saved->json, $escaped = false)
         ;
     }
 }
