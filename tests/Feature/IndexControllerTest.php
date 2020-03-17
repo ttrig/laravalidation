@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use App\Saved;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class IndexControllerTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_happy_path()
     {
         $this->get('/')
