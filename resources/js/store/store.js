@@ -27,7 +27,14 @@ export default new Vuex.Store({
         data['rule-' + row.id] = row.rule
 
         if (row.send_value) {
-          data['value-' + row.id] = row.value
+          let json
+          try {
+            json = JSON.parse(row.value)
+          } catch (_) {
+            json = row.value
+          }
+
+          data['value-' + row.id] = json
         }
       })
 
