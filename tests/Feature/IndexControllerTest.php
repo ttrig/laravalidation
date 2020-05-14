@@ -29,14 +29,6 @@ class IndexControllerTest extends TestCase
         ;
     }
 
-    public function test_sad_path_with_base64()
-    {
-        $this->get('/' . 'not-a-base-64-string')
-            ->assertOk()
-            ->assertDontSee('not-a-base-64-string')
-        ;
-    }
-
     public function test_happy_path_with_saved()
     {
         $saved = factory(Saved::class)->create();
@@ -44,6 +36,14 @@ class IndexControllerTest extends TestCase
         $this->get('/' . $saved->hashid)
             ->assertOk()
             ->assertSee($saved->json, $escaped = false)
+        ;
+    }
+
+    public function test_data_with_neither_base64_or_valid_hash()
+    {
+        $this->get('/' . 'not-a-base-64-string-or-valid-hash')
+            ->assertOk()
+            ->assertDontSee('not-a-base-64-string-or-valid-hash')
         ;
     }
 }
