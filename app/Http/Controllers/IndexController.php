@@ -30,7 +30,7 @@ class IndexController extends BaseController
         return null;
     }
 
-    private function jsonFromSaved($hashId): ?string
+    private function jsonFromSaved(?string $hashId): ?string
     {
         return $hashId ? optional(Saved::hashid($hashId)->first())->json : null;
     }

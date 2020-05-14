@@ -18,7 +18,7 @@ class Saved extends Model
 
     public function scopeHashid($query, string $encodedString)
     {
-        return $query->where('id', Hashids::decode($encodedString));
+        return $query->where('id', Hashids::decode($encodedString) ?: null);
     }
 
     public function getHashidAttribute()
