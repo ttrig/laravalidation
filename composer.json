@@ -8,12 +8,12 @@
         "php": "^7.4",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^7.23",
         "laravel/tinker": "^2.0",
         "vinkla/hashids": "^8.0"
     },
     "require-dev": {
-        "facade/ignition": "^2.0",
+        "facade/ignition": "^2.3.2",
         "fzaninotto/faker": "^1.9.1",
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^4.1",
