@@ -13,7 +13,7 @@ class SavedTest extends TestCase
 
     public function test_scopeHashid_returns_correct_model()
     {
-        $saved = factory(Saved::class)->create();
+        $saved = Saved::factory()->create();
 
         $result = Saved::hashid($saved->hashid)->firstOrFail();
 
@@ -22,7 +22,7 @@ class SavedTest extends TestCase
 
     public function test_getHashidAttribute_returns_correct_hashid()
     {
-        $saved = factory(Saved::class)->create();
+        $saved = Saved::factory()->create();
 
         $this->assertNotEmpty($saved->hashid);
         $this->assertEquals(Hashids::decode($saved->hashid)[0], $saved->id);

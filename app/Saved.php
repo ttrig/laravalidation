@@ -2,11 +2,14 @@
 
 namespace App;
 
-use Vinkla\Hashids\Facades\Hashids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Vinkla\Hashids\Facades\Hashids;
 
 class Saved extends Model
 {
+    use HasFactory;
+
     protected $table = 'saved';
 
     protected $guarded = [];

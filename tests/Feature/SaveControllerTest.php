@@ -12,9 +12,9 @@ class SaveControllerTest extends TestCase
 
     public function test_happy_path()
     {
-        factory(Saved::class, 15)->create();
+        Saved::factory(15)->create();
 
-        $json = factory(Saved::class)->make()->json;
+        $json = Saved::factory()->make()->json;
 
         $this->post('/save', compact('json'))->assertStatus(200);
 
@@ -23,9 +23,9 @@ class SaveControllerTest extends TestCase
 
     public function test_user_limit()
     {
-        factory(Saved::class, 15)->create(['ip' => '127.0.0.1']);
+        Saved::factory(15)->create(['ip' => '127.0.0.1']);
 
-        $json = factory(Saved::class)->make()->json;
+        $json = Saved::factory()->make()->json;
 
         $this->post('/save', compact('json'))
             ->assertStatus(422)

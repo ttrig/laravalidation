@@ -1,18 +1,26 @@
 <?php
 
-use App\Saved;
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(Saved::class, function (Faker $faker) {
-    return [
-        'json' => json_encode([
-            [
-                'id' => 1,
-                'rule' => 'required|string',
-                'value' => $faker->word,
-                'disabled' => $faker->randomElement([true, false]),
-            ],
-        ]),
-        'ip' => $faker->ipv4,
-    ];
-});
+use App\Saved;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class SavedFactory extends Factory
+{
+    protected $model = Saved::class;
+
+    public function definition()
+    {
+        return [
+            'json' => json_encode([
+                [
+                    'id' => 1,
+                    'rule' => 'required|string',
+                    'value' => $this->faker->word,
+                    'disabled' => $this->faker->randomElement([true, false]),
+                ],
+            ]),
+            'ip' => $this->faker->ipv4,
+        ];
+    }
+}
