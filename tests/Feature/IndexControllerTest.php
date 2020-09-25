@@ -31,7 +31,7 @@ class IndexControllerTest extends TestCase
 
     public function test_happy_path_with_saved()
     {
-        $saved = factory(Saved::class)->create();
+        $saved = Saved::factory()->create();
 
         $this->get('/' . $saved->hashid)
             ->assertOk()

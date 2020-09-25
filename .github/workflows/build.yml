@@ -43,7 +43,7 @@ jobs:
       - name: Execute tests
         run: |
           vendor/bin/phpcs
-          vendor/bin/phpunit
+          vendor/bin/phpunit --do-not-cache-result
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
