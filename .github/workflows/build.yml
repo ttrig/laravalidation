@@ -5,15 +5,8 @@ on: push
 jobs:
   tests:
     runs-on: ubuntu-latest
-    name: Tests
     steps:
       - uses: actions/checkout@v2
-
-      - name: Cache Composer
-        uses: actions/cache@v1
-        with:
-          path: ~/.composer/cache/files
-          key: dependencies-composer-${{ hashFiles('composer.lock') }}
 
       - name: Cache NPM
         uses: actions/cache@v1
@@ -24,7 +17,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
           coverage: none
 
