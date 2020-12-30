@@ -1,19 +1,17 @@
 <template>
   <div>
     <ValidationRows/>
-    <div class="row">
-      <div class="col-md-12 mb-3 text-center">
-        <ClearButton :count="getCount"/>
-        <SaveButton :count="getCount"/>
-        <AddButton :count="getCount"/>
-      </div>
+    <div class="my-4 text-center">
+      <ClearButton :count="getCount"/>
+      <SaveButton :count="getCount"/>
+      <AddButton :count="getCount"/>
     </div>
 
-    <div class="row">
+    <div class="mb-4">
       <ToggleMiddleware />
     </div>
 
-    <div class="row">
+    <div class="mb-4">
       <HashUrl/>
       <Base64Url/>
     </div>
@@ -30,9 +28,12 @@ import Base64Url from '@/components/Base64Url.vue'
 import ToggleMiddleware from '@/components/ToggleMiddleware.vue'
 
 export default {
+  props: [
+    'json',
+  ],
   created() {
     try {
-      let rows = JSON.parse($('#json-rows').text())
+      let rows = JSON.parse(this.json)
       _.each(rows, row => this.$store.commit('addRow', row))
       this.$store.commit('setSavedRows')
       this.$store.dispatch('validate')

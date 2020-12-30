@@ -1,15 +1,14 @@
 <template>
   <button
     type="button"
-    class="btn btn-secondary"
+    class="btn"
+    :class="disable ? 'bg-gray-300' : 'bg-gray-400'"
     :disabled="disable"
     @click="save"
   >
-    <span v-if="isSaving" class="spinner-border spinner-border-sm"
-      role="status"
-      aria-hidden="true"
-    ></span>
-    <i v-if="!isSaving" class="fa fa-save"></i> Save
+    <i v-if="isSaving" class="fa fa-fw fa-spin fa-spinner"></i>
+    <i v-else class="fa fa-fw fa-save"></i>
+    Save
   </button>
 </template>
 

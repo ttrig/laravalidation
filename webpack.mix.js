@@ -1,4 +1,5 @@
 const mix = require('laravel-mix')
+const tailwindcss = require('tailwindcss')
 
 require('laravel-mix-purgecss');
 
@@ -12,9 +13,10 @@ mix.webpackConfig({
 
 mix.js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
-  .purgeCss({
-    whitelist: ['show']
+  .options({
+    postCss: [tailwindcss('./tailwind.config.js')],
   })
+  .purgeCss()
 
 if (mix.inProduction()) {
   mix.version()

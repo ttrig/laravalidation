@@ -1,13 +1,9 @@
 <template>
   <transition name="root">
     <form v-if="count" autocomplete="off" novalidate>
-      <div class="row text-center d-none d-md-flex">
-        <div class="form-group col-md-6">
-          <label class="text-muted" v-text="ruleLabel"></label>
-        </div>
-        <div class="form-group col-md-6">
-          <label class="text-muted" v-text="valueLabel"></label>
-        </div>
+      <div class="w-full hidden md:flex justify-around mb-2">
+        <label class="border py-1 px-2 rounded bg-gray-100 text-gray-400" v-text="ruleLabel"></label>
+        <label class="border py-1 px-2 rounded bg-gray-100 text-gray-400" v-text="valueLabel"></label>
       </div>
       <transition-group name="row-list" tag="div">
         <div v-for="row in rows" :key="row.id">
@@ -33,10 +29,10 @@ export default {
       return this.$store.getters.count
     },
     ruleLabel() {
-      return this.rows.length > 1 ? 'Rules' : 'Rule'
+      return this.rows.length > 1 ? 'rules' : 'rule'
     },
     valueLabel() {
-      return this.rows.length > 1 ? 'Values' : 'Value'
+      return this.rows.length > 1 ? 'values' : 'value'
     },
   },
 }

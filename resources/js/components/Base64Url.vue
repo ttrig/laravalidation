@@ -1,8 +1,11 @@
 <template>
-  <div v-if="saveFailed && url" class="col-md-12 text-center">
-    <div class="alert alert-info">
+  <div v-if="saveFailed && url" class="m-auto md:w-2/3">
+    <div class="alert">
+      <span class="text-lg inline-block md:mr-3">
+        <i class="fa fa-check" />
+      </span>
       You can use this base64 URL instead of a saved one:
-      <code v-text="url"></code>
+      <code v-text="url" class="font-bold break-words"></code>
     </div>
   </div>
 </template>
