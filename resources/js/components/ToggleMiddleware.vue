@@ -1,17 +1,14 @@
 <template>
-  <div class="col-md-12 mb-3 text-center">
-    <div class="custom-control custom-switch">
-      <input
-        type="checkbox"
-        class="custom-control-input"
-        id="i-toggle-middleware"
-        v-model="checked"
-        @change="change"
-      >
-      <label class="custom-control-label" for="i-toggle-middleware">
-        Use <code>ConvertEmptyStringsToNull</code> middleware
-      </label>
-    </div>
+  <div class="mb-3 text-center">
+    <input
+      type="checkbox"
+      id="i-toggle-middleware"
+      v-model="checked"
+      @change="change"
+    >
+    <label for="i-toggle-middleware">
+      Use <code class="text-pink-500">ConvertEmptyStringsToNull</code> middleware
+    </label>
   </div>
 </template>
 

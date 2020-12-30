@@ -13,3 +13,14 @@ new Vue({
     Laravalidation
   }
 })
+
+document.getElementById('examples-menu').addEventListener('click', () => {
+  document.getElementById('examples-dropdown').classList.toggle('hidden')
+})
+
+document.addEventListener('mouseup', (event) => {
+  let dropdown = document.getElementById('examples-dropdown')
+  if (! dropdown.contains(event.traget)) {
+    dropdown.classList.add('hidden')
+  }
+})

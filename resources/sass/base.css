@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html, body {
+        background-color: #f8fafc;
+    }
+
+    #examples-dropdown a {
+        @apply block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900;
+    }
+
+    .btn {
+        @apply inline-flex items-center p-2 rounded text-white cursor-pointer;
+    }
+
+    .btn:disabled {
+        @apply cursor-not-allowed;
+    }
+
+    .alert {
+        @apply text-white px-6 py-4 border-0 rounded relative bg-green-400 text-center;
+    }
+}

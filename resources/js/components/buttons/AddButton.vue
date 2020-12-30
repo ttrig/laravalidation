@@ -1,13 +1,17 @@
 <template>
   <button
     type="button"
-    class="btn btn-success"
-    :class="{ 'btn-lg': !count }"
-    :disabled="limitReached"
+    class="btn"
+    :class="{
+      'p-4': !count,
+      'bg-green-500': !disable,
+      'bg-green-300': disable,
+    }"
+    :disabled="disable"
     :title="title"
     @click="click"
   >
-    <i class="fa fa-plus"></i> Add row
+    <i class="fa fa-fw fa-plus"></i> Add row
   </button>
 </template>
 
@@ -15,6 +19,9 @@
 export default {
   props: ['count'],
   computed: {
+    disable() {
+      return this.limitReached
+    },
     limitReached() {
       return this.count >= 6
     },
@@ -34,7 +41,7 @@ export default {
 </script>
 
 <style scoped>
-.btn-success {
+.bg-green-500 {
   transition: 0.4s;
 }
 </style>
