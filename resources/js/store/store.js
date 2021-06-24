@@ -27,14 +27,15 @@ export default new Vuex.Store({
         data['rule-' + row.id] = row.rule
 
         if (row.send_value) {
-          let json
-          try {
-            json = JSON.parse(row.value)
-          } catch (_) {
-            json = row.value
+          let valueToSend = String(row.value)
+
+          if (! /^\-?[0-9]+$/.test(row.value)) {
+            try {
+              valueToSend = JSON.parse(row.value)
+            } catch (_) {}
           }
 
-          data['value-' + row.id] = json
+          data['value-' + row.id] = valueToSend
         }
       })
 
