@@ -22,8 +22,7 @@ if (mix.inProduction()) {
   mix.version()
 } else {
   mix.sourceMaps()
+  mix.browserSync({
+    proxy: 'localhost:8000',
+  })
 }
-
-mix.browserSync({
-  proxy: 'localhost:8000',
-})
