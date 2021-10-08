@@ -19,7 +19,7 @@ class IndexController extends BaseController
 
     private function jsonFromBase64($encodedString): ?string
     {
-        if (! $json = base64_decode($encodedString, $strict = true)) {
+        if (! $json = base64_decode($encodedString, strict: true)) {
             return null;
         }
 

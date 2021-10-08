@@ -12,23 +12,23 @@ class ValidationController extends Controller
     {
         $validate = [];
         $ruleErrors = [];
+        $unsupportedRules = '/^unique|exists|dimensions|file|mimetypes|mimes/i';
 
         foreach ($this->getRuleIds($request) as $id) {
-            $ruleKey = 'rule-' . $id;
+            $ruleKey = "rule-$id";
             $rule = $request->input($ruleKey) ?? 'required|string';
 
+            /** @var \Illuminate\Validation\Validator */
             $ruleValidator = Validator::make($request->all(), [$ruleKey => $rule]);
 
             try {
                 $ruleValidator->passes();
                 $validate[$ruleKey] = 'required|string';
-                $validate['value-' . $id] = $rule;
+                $validate["value-$id"] = $rule;
             } catch (\Exception $e) {
-                if (preg_match('/^unique|exists|dimensions|file|mimetypes|mimes/i', $rule)) {
-                    $ruleErrors[$ruleKey] = 'Not supported yet.';
-                } else {
-                    $ruleErrors[$ruleKey] = $e->getMessage();
-                }
+                $ruleErrors[$ruleKey] = preg_match($unsupportedRules, $rule)
+                    ? 'Not supported yet.'
+                    : $e->getMessage();
             }
         }
 
@@ -46,8 +46,8 @@ class ValidationController extends Controller
     private function getRuleIds(Request $request): array
     {
         return collect($request->all())
-            ->filter(fn($value, $key) => preg_match('/^rule\-\d+$/', $key))
-            ->map(fn($value, $key) => explode('-', $key)[1])
+            ->filter(fn ($value, $key) => preg_match('/^rule\-\d+$/', $key))
+            ->map(fn ($value, $key) => explode('-', $key)[1])
             ->values()
             ->toArray();
     }
