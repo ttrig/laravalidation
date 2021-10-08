@@ -25,7 +25,7 @@ class ValidationControllerTest extends TestCase
         $response = $this->postJson('/validate', $data);
 
         if ($errorMessages) {
-            $response->assertStatus(422)->assertJsonFragment($errorMessages);
+            $response->assertUnprocessable()->assertJsonFragment($errorMessages);
         } else {
             $response->assertOk();
         }

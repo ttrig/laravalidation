@@ -16,9 +16,9 @@ class SaveControllerTest extends TestCase
 
         $json = Saved::factory()->make()->json;
 
-        $this->post('/save', compact('json'))->assertStatus(200);
+        $this->post('/save', compact('json'))->assertOk();
 
-        $this->assertDatabaseHas('saved', compact('json'));
+        $this->assertDatabaseHas(Saved::class, compact('json'));
     }
 
     public function test_user_limit()
@@ -28,7 +28,7 @@ class SaveControllerTest extends TestCase
         $json = Saved::factory()->make()->json;
 
         $this->post('/save', compact('json'))
-            ->assertStatus(422)
+            ->assertUnprocessable()
             ->assertSeeText('You saved to many entries to fast, try again later.')
         ;
     }
