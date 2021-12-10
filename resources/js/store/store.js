@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     hashid: null,
+    maxRows: 6,
     rows: [],
     errors: [],
     saving: false,
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     rows: state => state.rows,
     errors: state => state.errors,
     count: state => state.rows.length,
+    rowLimitReached: state => state.rows.length >= state.maxRows,
     saveFailed: state => state.saveFailed,
     savedDiff: state => state.rows == state.savedRows,
     postData(state) {
@@ -139,7 +141,7 @@ export default new Vuex.Store({
       if (!state.saving) {
         commit('setSaving', true)
 
-        let url = '/validate'
+        let url = '/api/validate'
         if (! state.useMiddleware) {
           url += '?disable-middleware'
         }
@@ -149,6 +151,30 @@ export default new Vuex.Store({
            .catch(error => commit('setErrors', error.response.data.errors))
            .finally(() => commit('setSaving', false))
       }
+    },
+    save({state, getters, commit}) {
+      if (state.saving || getters.savedDiff || !getters.count) {
+        return
+      }
+
+      commit('setSaving', true)
+
+      let data = {
+        json: JSON.stringify(getters.rows)
+      }
+
+      axios.post('/api/save', data)
+        .then(response => {
+          commit('setHashid', response.data)
+          commit('setSaveFailed', false)
+        })
+        .catch(error => {
+          commit('setSaveFailed', true)
+        })
+        .finally(() => {
+          commit('setSavedRows')
+          commit('setSaving', false)
+        })
     },
   },
 })

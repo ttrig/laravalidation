@@ -24,13 +24,13 @@
             class="origin-top-left absolute left-0 mt-2 z-20 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden"
           >
             <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="examples-menu">
-              <a href="/example/required">Required</a>
-              <a href="/example/exclude">Exclude</a>
-              <a href="/example/nullable">Nullable</a>
-              <a href="/example/filled">Filled</a>
-              <a href="/example/present">Present</a>
-              <a href="/example/sometimes">Sometimes</a>
-              <a href="/example/regex">Regex</a>
+              <a href="{{ route('example', 'required') }}">Required</a>
+              <a href="{{ route('example', 'exclude') }}">Exclude</a>
+              <a href="{{ route('example', 'nullable') }}">Nullable</a>
+              <a href="{{ route('example', 'filled') }}">Filled</a>
+              <a href="{{ route('example', 'present') }}">Present</a>
+              <a href="{{ route('example', 'sometimes') }}">Sometimes</a>
+              <a href="{{ route('example', 'regex') }}">Regex</a>
             </div>
           </div>
         </div>
