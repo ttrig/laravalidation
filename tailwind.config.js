@@ -1,21 +1,21 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
-  purge: {
-    content: [
-      './resources/**/*.blade.php',
-      './resources/**/*.js',
-      './resources/**/*.vue',
-    ],
-  },
-  darkMode: false,
+  content: [
+    './resources/**/*.blade.php',
+    './resources/**/*.js',
+    './resources/**/*.vue',
+  ],
   theme: {
     extend: {
       colors: {
         laravel: '#ff2d20',
+        green: colors.emerald,
+        yellow: colors.amber,
+        purple: colors.violet,
+        gray: colors.neutral,
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
 }

@@ -22,7 +22,7 @@
         <i class="fa fa-fw" :class="row.disabled ? 'fa-toggle-on' : 'fa-toggle-off'"></i>
       </button>
 
-      <div class="flex flex-col flex-grow p-1">
+      <div class="flex flex-col grow p-1">
 
         <div class="relative w-full flex flex-wrap items-stretch mb-1">
           <input
@@ -55,7 +55,7 @@
 
     <div class="flex flex-row md:w-1/2 flex-row-reverse md:flex-row items-baseline">
 
-      <div class="flex-grow p-1">
+      <div class="grow p-1">
 
         <div class="relative w-full flex flex-wrap items-stretch mb-1">
           <span class="absolute h-full w-20 py-3 z-10 leading-snug text-gray-400 text-center bg-gray-100 rounded-l">

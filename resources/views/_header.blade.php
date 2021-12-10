@@ -1,11 +1,11 @@
 <header>
   <nav class="flex items-center justify-between flex-wrap max-w-screen-xl mx-auto w-full py-8">
-    <a href="/" class="flex w-full lg:w-auto justify-center items-center flex-shrink-0 text-laravel">
+    <a href="/" class="flex w-full lg:w-auto justify-center items-center shrink text-laravel">
       <i class="fa fa-fw fa-tasks fa-lg mr-2 ml-2 lg:ml-0"></i>
       <span class="font-medium text-4xl tracking-tight">{{ config('app.name') }}</span>
     </a>
-    <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto ml-10">
-      <div class="lg:flex-grow text-lg text-gray-600">
+    <div class="w-full grow lg:flex lg:items-center lg:w-auto ml-10">
+      <div class="lg:grow text-lg text-gray-600">
         <div class="relative inline-block text-left mr-6 mt-4 lg:inline-block lg:mt-0">
           <div>
             <span
