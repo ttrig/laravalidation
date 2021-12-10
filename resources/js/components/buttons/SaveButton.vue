@@ -4,9 +4,9 @@
     class="btn"
     :class="disable ? 'bg-gray-300' : 'bg-gray-400'"
     :disabled="disable"
-    @click="save"
+    @click="click"
   >
-    <i v-if="isSaving" class="fa fa-fw fa-spin fa-spinner"></i>
+    <i v-if="saving" class="fa fa-fw fa-spin fa-spinner"></i>
     <i v-else class="fa fa-fw fa-save"></i>
     Save
   </button>
@@ -14,44 +14,20 @@
 
 <script>
 export default {
-  data() {
-    return {
-      isSaving: false
-    }
-  },
-  props: ['count'],
   computed: {
+    saving() {
+      return this.$store.state.saving
+    },
     disable() {
-      if (this.isSaving) {
+      if (this.saving) {
         return true
       }
-      return !this.count || this.$store.getters.savedDiff
+      return !this.$store.getters.count || this.$store.getters.savedDiff
     },
   },
   methods: {
-    save() {
-      this.isSaving = true
-
-      if (!this.count || this.$store.getters.savedDiff) {
-        return
-      }
-
-      let data = {
-        json: JSON.stringify(this.$store.getters.rows)
-      }
-
-      axios.post('/save', data)
-         .then(response => {
-           this.$store.commit('setHashid', response.data)
-           this.$store.commit('setSaveFailed', false)
-         })
-         .catch(error => {
-           this.$store.commit('setSaveFailed', true)
-         })
-         .finally(() => {
-           this.$store.commit('setSavedRows')
-           this.isSaving = false
-         })
+    click() {
+      this.$store.dispatch('save')
     },
   },
 }

@@ -12,10 +12,9 @@
 
 <script>
 export default {
-  props: ['count'],
   computed: {
     disable() {
-      return !this.count
+      return !this.$store.getters.count
     },
   },
   methods: {

@@ -8,7 +8,7 @@ class ValidationControllerTest extends TestCase
 {
     public function test_disable_middleware_does_not_convert_empty_strings_to_null()
     {
-        $this->postJson('/validate?disable-middleware', [
+        $this->postJson('/api/validate?disable-middleware', [
                 'rule-1' => 'nullable',
                 'value-1' => '',
             ])
@@ -22,7 +22,7 @@ class ValidationControllerTest extends TestCase
      */
     public function test_validation($data, $errorMessages = [])
     {
-        $response = $this->postJson('/validate', $data);
+        $response = $this->postJson('/api/validate', $data);
 
         if ($errorMessages) {
             $response->assertUnprocessable()->assertJsonFragment($errorMessages);

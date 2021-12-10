@@ -2,9 +2,9 @@
   <div>
     <ValidationRows/>
     <div class="my-4 text-center">
-      <ClearButton :count="getCount"/>
-      <SaveButton :count="getCount"/>
-      <AddButton :count="getCount"/>
+      <ClearButton/>
+      <SaveButton/>
+      <AddButton/>
     </div>
 
     <div class="mb-4">
@@ -49,11 +49,6 @@ export default {
     HashUrl,
     Base64Url,
     ToggleMiddleware,
-  },
-  computed: {
-    getCount() {
-      return this.$store.getters.count
-    },
   },
 }
 </script>

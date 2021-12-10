@@ -3,7 +3,7 @@
     type="button"
     class="btn"
     :class="{
-      'p-4': !count,
+      'p-4': !$store.getters.count,
       'bg-green-500': !disable,
       'bg-green-300': disable,
     }"
@@ -17,16 +17,15 @@
 
 <script>
 export default {
-  props: ['count'],
   computed: {
     disable() {
-      return this.limitReached
+      return this.$store.getters.rowLimitReached
     },
     limitReached() {
-      return this.count >= 6
+      return this.$store.getters.count >= 6
     },
     title() {
-      if (this.limitReached) {
+      if (this.$store.getters.rowLimitReached) {
         return 'Max rows reached.'
       }
     },
