@@ -1,8 +1,10 @@
+@import "@fortawesome/fontawesome-free/css/all.min";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+@layer components {
     html, body {
         background-color: #f8fafc;
     }

@@ -10,7 +10,7 @@ class ExampleControllerTest extends TestCase
     {
         $this->get('/example/foobar')
             ->assertOk()
-            ->assertSee('json=""', escape: false)
+            ->assertSee('<template id="initial-rows"></template>', escape: false)
         ;
     }
 

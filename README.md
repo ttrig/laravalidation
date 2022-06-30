@@ -19,7 +19,7 @@ touch database/database.sqlite
 composer install
 
 npm install
-npm run watch
+npm run dev
 
 php artisan serve
 ```

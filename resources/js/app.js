@@ -1,18 +1,12 @@
-require('./bootstrap')
-
-import Vue from 'vue'
+import './bootstrap'
+import '../css/app.css'
+import { createApp } from 'vue'
 import store from './store/store'
-import Laravalidation from './Laravalidation'
+import Laravalidation from './Laravalidation.vue'
 
-Vue.config.productionTip = false
-
-new Vue({
-  el: '#main-container',
-  store: store,
-  components: {
-    Laravalidation
-  }
-})
+createApp(Laravalidation, {initialRows: document.getElementById('initial-rows').innerHTML})
+  .use(store)
+  .mount('#main-container')
 
 document.getElementById('examples-menu').addEventListener('click', () => {
   document.getElementById('examples-dropdown').classList.toggle('hidden')

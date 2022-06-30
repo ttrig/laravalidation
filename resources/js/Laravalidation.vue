@@ -1,7 +1,7 @@
 <template>
   <div>
     <ValidationRows/>
-    <div class="my-4 text-center">
+    <div class="my-4 text-center space-x-2">
       <ClearButton/>
       <SaveButton/>
       <AddButton/>
@@ -29,11 +29,11 @@ import ToggleMiddleware from '@/components/ToggleMiddleware.vue'
 
 export default {
   props: [
-    'json',
+    'initialRows',
   ],
   created() {
     try {
-      let rows = JSON.parse(this.json)
+      let rows = JSON.parse(this.initialRows)
       _.each(rows, row => this.$store.commit('addRow', row))
       this.$store.commit('setSavedRows')
       this.$store.dispatch('validate')

@@ -12,17 +12,17 @@
 
     <title>{{ config('app.name') }}</title>
 
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @vite(['resources/js/app.js'])
   </head>
   <body>
     @include('_header')
 
+    <template id="initial-rows">{{ $json }}</template>
+
     <div id="main-container" class="max-w-screen-xl mx-auto p-1 lg:p-0">
-      <laravalidation json="{{ $json }}"></laravalidation>
+      <laravalidation></laravalidation>
     </div>
 
     @include('_footer')
-
-    <script src="{{ mix('js/app.js') }}"></script>
   </body>
 </html>
