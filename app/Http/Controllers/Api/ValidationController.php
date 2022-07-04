@@ -12,7 +12,6 @@ class ValidationController extends Controller
     {
         $validate = [];
         $ruleErrors = [];
-        $unsupportedRules = '/^unique|exists|dimensions|file|mimetypes|mimes/i';
 
         foreach ($this->getRuleIds($request) as $id) {
             $ruleKey = "rule-$id";
@@ -26,7 +25,7 @@ class ValidationController extends Controller
                 $validate[$ruleKey] = 'required|string';
                 $validate["value-$id"] = $rule;
             } catch (\Exception $e) {
-                $ruleErrors[$ruleKey] = preg_match($unsupportedRules, $rule)
+                $ruleErrors[$ruleKey] = $this->ruleIsUnsupported($rule)
                     ? 'Not supported yet.'
                     : $e->getMessage();
             }
@@ -41,6 +40,14 @@ class ValidationController extends Controller
         });
 
         return $validator->validate();
+    }
+
+    private function ruleIsUnsupported(string $rule): bool
+    {
+        return preg_match(
+            '/^unique|exists|dimensions|file|mimetypes|mimes/i',
+            $rule
+        ) === 1;
     }
 
     private function getRuleIds(Request $request): array

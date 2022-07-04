@@ -6,7 +6,7 @@ import Laravalidation from './Laravalidation.vue'
 
 createApp(Laravalidation, {initialRows: document.getElementById('initial-rows').innerHTML})
   .use(store)
-  .mount('#main-container')
+  .mount('#app')
 
 document.getElementById('examples-menu').addEventListener('click', () => {
   document.getElementById('examples-dropdown').classList.toggle('hidden')
