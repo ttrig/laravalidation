@@ -19,8 +19,11 @@
 
     <template id="initial-rows">{{ $json }}</template>
 
-    <div id="main-container" class="max-w-screen-xl mx-auto p-1 lg:p-0">
-      <laravalidation></laravalidation>
+    <div class="max-w-screen-xl mx-auto p-1 lg:p-0">
+      <div id="app">
+        <laravalidation></laravalidation>
+      </div>
+      <div id="url-container" class="m-auto md:w-2/3 mb-4"></div>
     </div>
 
     @include('_footer')

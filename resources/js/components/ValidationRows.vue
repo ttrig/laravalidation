@@ -1,6 +1,6 @@
 <template>
   <transition name="root">
-    <form v-if="count" autocomplete="off" novalidate>
+    <form v-if="rows.length" autocomplete="off" novalidate>
       <div class="w-full hidden md:flex justify-around mb-2">
         <label class="border py-1 px-2 rounded bg-gray-100 text-gray-400" v-text="ruleLabel"></label>
         <label class="border py-1 px-2 rounded bg-gray-100 text-gray-400" v-text="valueLabel"></label>
@@ -25,9 +25,6 @@ export default {
     rows() {
       return this.$store.getters.rows
     },
-    count() {
-      return this.$store.getters.count
-    },
     ruleLabel() {
       return this.rows.length > 1 ? 'rules' : 'rule'
     },
@@ -43,7 +40,7 @@ export default {
   .root-leave-active {
     transition: opacity 0.25s ease-out;
   }
-  .root-enter,
+  .root-enter-from,
   .root-leave-to {
     opacity: 0;
   }
@@ -53,7 +50,7 @@ export default {
     transition: all 0.2s;
   }
 
-  .row-list-enter,
+  .row-list-enter-from,
   .row-list-leave-to {
     opacity: 0;
     transform: translateY(-20px);

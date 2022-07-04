@@ -14,7 +14,7 @@
 export default {
   computed: {
     disable() {
-      return !this.$store.getters.count
+      return ! this.$store.getters.rows.length
     },
   },
   methods: {
