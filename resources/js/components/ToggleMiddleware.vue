@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { store } from '@/store.js'
+
 export default {
   data() {
     return {
@@ -21,8 +23,8 @@ export default {
   },
   methods: {
     change() {
-      this.$store.commit('toggleMiddleware', this.checked)
-      this.$store.dispatch('validate')
+      store.toggleMiddleware(this.checked)
+      store.validate()
     },
   },
 }

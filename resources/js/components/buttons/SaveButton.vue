@@ -27,10 +27,12 @@
 </template>
 
 <script>
+import { store } from '@/store.js'
 import Alert from '@/components/Alert.vue'
 
 export default {
   data: () => ({
+    store,
     isSaving: false,
     failed: false,
     savedRows: [],
@@ -40,13 +42,13 @@ export default {
     Alert,
   },
   created() {
-    this.savedRows = this.$store.state.rows
+    this.savedRows = this.store.rows
   },
   computed: {
     disabled() {
       return this.isSaving
-        || this.$store.state.rows.length < 1
-        || this.savedRows == this.$store.state.rows
+        || this.store.rows.length < 1
+        || this.savedRows == this.store.rows
     },
     permaLink() {
       if (this.savedHashid) {
@@ -56,8 +58,8 @@ export default {
       return null
     },
     base64Url() {
-      if (this.$store.state.rows.length) {
-        const json = JSON.stringify(this.$store.state.rows)
+      if (this.store.rows.length) {
+        const json = JSON.stringify(this.store.rows)
         return `${window.location.protocol}//${window.location.host}/` + btoa(json)
       }
 
@@ -66,7 +68,7 @@ export default {
   },
   methods: {
     save() {
-      let rowsToSave = this.$store.state.rows
+      let rowsToSave = this.store.rows
 
       this.isSaving = true
       this.savedHashid = null

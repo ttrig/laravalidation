@@ -3,7 +3,7 @@
     type="button"
     class="btn"
     :class="{
-      'p-4': ! $store.getters.rows.length,
+      'p-4': ! store.rows.length,
       'bg-green-500': !disable,
       'bg-green-300': disable,
     }"
@@ -16,13 +16,20 @@
 </template>
 
 <script>
+import { store } from '@/store.js'
+
 export default {
+  data() {
+    return {
+      store
+    }
+  },
   computed: {
     disable() {
       return this.limitReached
     },
     limitReached() {
-      return this.$store.getters.rows.length >= 6
+      return this.store.rows.length >= 6
     },
     title() {
       if (this.limitReached) {
@@ -32,8 +39,8 @@ export default {
   },
   methods: {
     click() {
-      this.$store.commit('addRow')
-      this.$store.dispatch('validate')
+      this.store.addRow()
+      this.store.validate()
     },
   },
 }

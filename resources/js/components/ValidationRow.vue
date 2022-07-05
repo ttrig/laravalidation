@@ -105,7 +105,7 @@
         type="button"
         class="btn md:ml-1 bg-blue-400"
         title="Null"
-        @click="nullRow"
+        @click="nullRowValue"
       >
         <i class="fa fa-fw fa-eraser"></i>
       </button>
@@ -117,13 +117,15 @@
 </template>
 
 <script>
+import { store } from '@/store.js'
+
 export default {
   props: [
     'row',
   ],
   computed: {
     errors() {
-      return this.$store.getters.errors
+      return store.errors
     },
     ruleInputName() {
       return 'rule-' + this.row.id
@@ -161,25 +163,25 @@ export default {
   },
   methods: {
     deleteRow() {
-      this.$store.commit('deleteRow', this.row.id)
-      this.$store.dispatch('validate')
+      store.deleteRow(this.row.id)
+      store.validate()
     },
     updateRow() {
       // TODO add some lazy keys stuff here
-      this.$store.commit('updateRow', this.row)
-      this.$store.dispatch('validate')
+      store.updateRow(this.row)
+      store.validate()
     },
     toggleRowDisabled() {
-      this.$store.commit('toggleRowDisabled', this.row)
-      this.$store.dispatch('validate')
+      store.toggleRowDisabled(this.row)
+      store.validate()
     },
     toggleRowSendValue() {
-      this.$store.commit('toggleRowSendValue', this.row)
-      this.$store.dispatch('validate')
+      store.toggleRowSendValue(this.row)
+      store.validate()
     },
-    nullRow(event) {
-      this.$store.commit('nullRow', this.row)
-      this.$store.dispatch('validate')
+    nullRowValue() {
+      store.nullRowValue(this.row)
+      store.validate()
     },
   },
 }

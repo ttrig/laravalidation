@@ -11,15 +11,17 @@
 </template>
 
 <script>
+import { store } from '@/store.js'
+
 export default {
   computed: {
     disable() {
-      return ! this.$store.getters.rows.length
+      return ! store.rows.length
     },
   },
   methods: {
     click() {
-      this.$store.commit('deleteAllRows')
+      store.deleteAllRows()
     }
   }
 }

@@ -1,12 +1,12 @@
 <template>
   <transition name="root">
-    <form v-if="rows.length" autocomplete="off" novalidate>
+    <form v-if="store.rows.length" autocomplete="off" novalidate>
       <div class="w-full hidden md:flex justify-around mb-2">
         <label class="border py-1 px-2 rounded bg-gray-100 text-gray-400" v-text="ruleLabel"></label>
         <label class="border py-1 px-2 rounded bg-gray-100 text-gray-400" v-text="valueLabel"></label>
       </div>
       <transition-group name="row-list" tag="div">
-        <div v-for="row in rows" :key="row.id">
+        <div v-for="row in store.rows" :key="row.id">
           <ValidationRow :row="row" />
         </div>
       </transition-group>
@@ -15,21 +15,24 @@
 </template>
 
 <script>
+import { store } from '@/store.js'
 import ValidationRow from './ValidationRow.vue'
 
 export default {
+  data() {
+    return {
+      store
+    }
+  },
   components: {
     ValidationRow,
   },
   computed: {
-    rows() {
-      return this.$store.getters.rows
-    },
     ruleLabel() {
-      return this.rows.length > 1 ? 'rules' : 'rule'
+      return this.store.rows.length > 1 ? 'rules' : 'rule'
     },
     valueLabel() {
-      return this.rows.length > 1 ? 'values' : 'value'
+      return this.store.rows.length > 1 ? 'values' : 'value'
     },
   },
 }
