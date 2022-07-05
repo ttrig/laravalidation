@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { store } from '@/store.js'
 import ValidationRows from '@/components/ValidationRows.vue'
 import ClearButton from '@/components/buttons/ClearButton.vue'
 import SaveButton from '@/components/buttons/SaveButton.vue'
@@ -22,14 +23,11 @@ import AddButton from '@/components/buttons/AddButton.vue'
 import ToggleMiddleware from '@/components/ToggleMiddleware.vue'
 
 export default {
-  props: [
-    'initialRows',
-  ],
   created() {
     try {
-      let rows = JSON.parse(this.initialRows)
-      _.each(rows, row => this.$store.commit('addRow', row))
-      this.$store.dispatch('validate')
+      let rows = JSON.parse(document.getElementById('initial-rows').innerHTML)
+      _.each(rows, row => store.addRow(row))
+      store.validate()
     } catch {
       //
     }
