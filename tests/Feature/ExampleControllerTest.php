@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class ExampleControllerTest extends TestCase
@@ -14,9 +15,7 @@ class ExampleControllerTest extends TestCase
         ;
     }
 
-    /**
-     * @dataProvider exampleProvider
-     */
+    #[DataProvider('exampleProvider')]
     public function test_happy_path($name, $needle)
     {
         $this->get("/example/$name")
@@ -25,7 +24,7 @@ class ExampleControllerTest extends TestCase
         ;
     }
 
-    public function exampleProvider()
+    public static function exampleProvider()
     {
         return [
             ['required', '"required_unless:value-1,foobar",'],

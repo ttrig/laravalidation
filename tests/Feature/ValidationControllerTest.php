@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class ValidationControllerTest extends TestCase
@@ -17,9 +18,7 @@ class ValidationControllerTest extends TestCase
         ;
     }
 
-    /**
-     * @dataProvider provider
-     */
+    #[DataProvider('provider')]
     public function test_validation($data, $errorMessages = [])
     {
         $response = $this->postJson('/api/validate', $data);
@@ -31,7 +30,7 @@ class ValidationControllerTest extends TestCase
         }
     }
 
-    public function provider()
+    public static function provider()
     {
         return [
             'Filled value' => [
