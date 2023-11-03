@@ -11,8 +11,7 @@ class ExampleController extends BaseController
     {
         $json = method_exists($this, $method = 'example' . Str::studly($slug))
             ? json_encode($this->$method())
-            : null
-        ;
+            : null;
 
         return view('index', compact('json'));
     }

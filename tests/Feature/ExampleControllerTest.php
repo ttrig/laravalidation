@@ -11,8 +11,7 @@ class ExampleControllerTest extends TestCase
     {
         $this->get('/example/foobar')
             ->assertOk()
-            ->assertSee('<template id="initial-rows"></template>', escape: false)
-        ;
+            ->assertSee('<template id="initial-rows"></template>', escape: false);
     }
 
     #[DataProvider('exampleProvider')]
@@ -20,8 +19,7 @@ class ExampleControllerTest extends TestCase
     {
         $this->get("/example/$name")
             ->assertOk()
-            ->assertSee(htmlentities($needle), escape: false)
-        ;
+            ->assertSee(htmlentities($needle), escape: false);
     }
 
     public static function exampleProvider()

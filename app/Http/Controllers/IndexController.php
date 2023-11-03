@@ -11,8 +11,7 @@ class IndexController extends BaseController
     {
         $json = $this->jsonFromBase64($data)
              ?? $this->jsonFromSaved($data)
-             ?? $this->jsonFromDefault()
-        ;
+             ?? $this->jsonFromDefault();
 
         return view('index', compact('json'));
     }

@@ -29,7 +29,6 @@ class SaveControllerTest extends TestCase
 
         $this->post('/api/save', compact('json'))
             ->assertUnprocessable()
-            ->assertSeeText('You saved to many entries to fast, try again later.')
-        ;
+            ->assertSeeText('You saved to many entries to fast, try again later.');
     }
 }
