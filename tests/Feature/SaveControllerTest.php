@@ -16,7 +16,7 @@ class SaveControllerTest extends TestCase
 
         $json = Saved::factory()->make()->json;
 
-        $this->post('/api/save', compact('json'))->assertOk();
+        $this->postJson('/api/save', compact('json'))->assertOk();
 
         $this->assertDatabaseHas(Saved::class, compact('json'));
     }
@@ -27,7 +27,7 @@ class SaveControllerTest extends TestCase
 
         $json = Saved::factory()->make()->json;
 
-        $this->post('/api/save', compact('json'))
+        $this->postJson('/api/save', compact('json'))
             ->assertUnprocessable()
             ->assertSeeText('You saved to many entries to fast, try again later.');
     }

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class ValidationController extends Controller
+class ValidationController
 {
     public function __invoke(Request $request)
     {

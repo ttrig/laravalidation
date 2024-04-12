@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Saved;
-use Illuminate\Routing\Controller as BaseController;
 
-class IndexController extends BaseController
+class IndexController
 {
     public function __invoke($data = null)
     {

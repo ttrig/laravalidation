@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Str;
 
-class ExampleController extends BaseController
+class ExampleController
 {
     public function __invoke($slug)
     {
