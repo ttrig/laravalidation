@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Saved;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
 
-class SaveController extends BaseController
+class SaveController
 {
     public function __invoke(Request $request)
     {
