@@ -10,9 +10,9 @@ class Saved extends Model
 {
     use HasFactory;
 
-    protected $table = 'saved';
+    protected static $unguarded = true;
 
-    protected $guarded = [];
+    protected $table = 'saved';
 
     protected $hidden = [
         'id',
