@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +15,7 @@
     @vite(['resources/js/app.js'])
   </head>
   <body>
-    @include('_header')
+    @include('layout.header')
 
     <template id="initial-rows">{{ $json }}</template>
 
@@ -26,6 +26,6 @@
       <div id="url-container" class="m-auto md:w-2/3 mb-4"></div>
     </div>
 
-    @include('_footer')
+    @include('layout.footer')
   </body>
 </html>
